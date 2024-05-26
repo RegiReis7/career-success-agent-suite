@@ -1,6 +1,8 @@
 from crewai import Task
 from agents.cv_analyzer import CVAnalyzer
+from agents.industry_expert import IndustryExpert
 from textwrap import dedent
+from custom_callback import writeTaskResult
 
 
 class CVAnalyzerTask():
@@ -21,5 +23,7 @@ class CVAnalyzerTask():
             Job Title: {job_opp}
             Key Qualifications: {requirements}
             """),
+            callback=writeTaskResult,
+            context=[IndustryExpert.setup()],
             agent=CVAnalyzer.setup()
         )

@@ -1,12 +1,13 @@
 from crewai import Agent
 
 
-class IndustryExpert():
+class IndustryExpert:
     
-    def setup(self):
+    def setup():
         return Agent(
             role="Tech Industry Expert",
             goal="Provide insights on current technological advancements and industry dynamics",
             backstory="As a Tech Industry Expert, your expertise in the tech sector will help identify emerging trends, competitive landscapes, and strategic opportunities to inform decision-making processes.",
-            verbose=True
+            verbose=True,
+            allow_delegation=False
         )

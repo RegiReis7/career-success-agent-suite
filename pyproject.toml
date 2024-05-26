@@ -1,5 +1,5 @@
 [tool.poetry]
-name = "be-a-good-fit-for-a-job"
+name = "job-fit-enhancer"
 version = "0.1.0"
 description = ""
 authors = ["RegiReis7 <reginaldo@live.com.pt>"]

@@ -1,9 +1,9 @@
 from crewai import Agent
 
 
-class CareerConsultant():
+class CareerConsultant:
 
-    def setup(self):
+    def setup():
         return Agent(
             role="Career Consultant",
             goal="Guide candidates on career development and job placement strategies.",
