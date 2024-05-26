@@ -2,11 +2,15 @@ from crewai import Task
 from agents.industry_expert import IndustryExpert
 from textwrap import dedent
 from custom_callback import writeTaskResult
+from crewai_tools import EXASearchTool
 
 
 class IndustryReqTask():
 
     def setup(self, job_opp):
+
+        exa_tool = EXASearchTool()
+
         return Task(
             description=dedent(f"""
             Research and provide a comprehensive overview of the latest trends,
@@ -19,6 +23,7 @@ class IndustryReqTask():
 
             Job Opportunity Role: {job_opp}
             """),
+            tools=[exa_tool],
             callback=writeTaskResult,
             agent=IndustryExpert().setup()
         )

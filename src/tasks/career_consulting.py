@@ -5,10 +5,10 @@ from agents.industry_expert import IndustryExpert
 from custom_callback import writeTaskResult
 from textwrap import dedent
 
-
 class CareerConsultingTask():
 
     def setup(self, job_opp: str, candidate_name: str):
+        
         return Task(
             description=dedent(f"""
             Advise and support a candidate in their career development and job

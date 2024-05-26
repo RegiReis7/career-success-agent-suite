@@ -16,7 +16,7 @@ class SeachDocument():
         self.__bedrock_embeddings = embeddings.BedrockEmbeddings(
             model_id="amazon.titan-embed-text-v1", client=self.__bedrock_client)
 
-        self.pdfFile = pdfFile
+        self.__pdfFile = pdfFile
 
     def __text_splitter(self, document_text: str) -> List[str]:
         text_splitter = RecursiveCharacterTextSplitter(
@@ -34,7 +34,7 @@ class SeachDocument():
     @tool("Document Search Engine")
     def search_document(self, query: str) -> str:
         """Search through a document and retrieve the most relevant pieces based on the query"""
-        pdf_text = read_pdf(self.pdfFile)
+        pdf_text = read_pdf(self.__pdfFile)
         chunks = self.__text_splitter(pdf_text)
         self.__index(chunks)
         search_results = self.__vectorstore.similarity_search(query, k=1)

@@ -1,6 +1,8 @@
 import streamlit as st
 from crewai import Crew
 import os
+from agents.index import Agents
+from tasks.index import Tasks
 
 
 def main():
@@ -19,27 +21,36 @@ def main():
         os.environ["OPENAI_API_KEY"] = mistral_api_key
         os.environ["OPENAI_API_BASE"] = "https://api.mistral.ai/v1"
         os.environ["OPENAI_MODEL_NAME"] = "mistral-small-2402"
-        
+
         pdf_file = st.file_uploader("Upload Your CV", type=["pdf"])
 
         if pdf_file is not None:
-            
+
             st.write("PDF file uploaded successfully!")
             # Main page inputs after processing button is hit
             st.subheader("Tell Us About Yourself")
             user_name = st.text_input("Your Name")
             job_opp_name = st.text_input("Job Opportunity Name")
-            key_requirements = st.text_input("Key Requirements of the Opportunity")
+            key_requirements = st.text_input(
+                "Key Requirements of the Opportunity")
             consult_button = st.button("CONSULT ME!")
 
             if consult_button:
                 st.write("Processing your request...")
 
-                # Further processing logic can be added here
-                # Example: API calls, CV analysis, etc.
+                crew = Crew(
+                    agents=Agents.load(),
+                    tasks=Tasks.load(
+                        job_opp=job_opp_name, candidate_name=user_name, requirements=key_requirements, cv=pdf_file),
+                    verbose=2
+                )
+
+                result = crew.kickoff()
 
                 # Placeholder response
                 st.success("Your consultation request has been submitted!")
+
+                st.write(result)
 
 
 if __name__ == "__main__":
