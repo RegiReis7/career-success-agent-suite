@@ -40,6 +40,8 @@ poetry install
 
 ## 💻 Usage
 
+**NOTE**: This project was tested using MISTRAL's AI LLM, so make sure to add the MISTRAL_API_KEY in your environment.
+
 To run the application, use the following command:
 
 ```bash
