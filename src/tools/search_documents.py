@@ -4,7 +4,7 @@ from langchain_community.vectorstores import faiss
 from typing import List
 import boto3
 from crewai_tools import tool
-from pdf_reader import read_pdf
+from tools.pdf_reader import read_pdf
 
 
 class SeachDocument():

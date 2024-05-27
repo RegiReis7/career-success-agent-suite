@@ -1,13 +1,13 @@
 from crewai import Task
 from agents.industry_expert import IndustryExpert
 from textwrap import dedent
-from custom_callback import writeTaskResult
+from tasks.custom_callback import writeTaskResult
 from crewai_tools import EXASearchTool
 
 
 class IndustryReqTask():
 
-    def setup(self, job_opp):
+    def setup(job_opp):
 
         exa_tool = EXASearchTool()
 

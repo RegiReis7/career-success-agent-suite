@@ -2,14 +2,14 @@ from crewai import Task
 from agents.cv_analyzer import CVAnalyzer
 from agents.industry_expert import IndustryExpert
 from textwrap import dedent
-from custom_callback import writeTaskResult
+from tasks.custom_callback import writeTaskResult
 from tools.search_documents import SeachDocument
 from streamlit.runtime.uploaded_file_manager import UploadedFile
 
 
 class CVAnalyzerTask():
 
-    def setup(self, job_opp: str, requirements: str, cv: UploadedFile | None):
+    def setup(job_opp: str, requirements: str, cv: UploadedFile | None, contextTask: Task):
 
         search_documents_tool = SeachDocument(cv).search_document
 
@@ -30,6 +30,6 @@ class CVAnalyzerTask():
             """),
             callback=writeTaskResult,
             tools=[search_documents_tool],
-            context=[IndustryExpert.setup()],
+            context=contextTask,
             agent=CVAnalyzer.setup()
         )
