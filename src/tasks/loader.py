@@ -15,4 +15,4 @@ class Tasks:
         cv_analyzer_task = CVAnalyzerTask.setup(
             job_opp=job_opp, requirements=requirements, cv=cv, contextTask=industry_requirements_task)
 
-        return [cv_analyzer_task, industry_requirements_task, CareerConsultingTask.setup(job_opp, candidate_name, [cv_analyzer_task, industry_requirements_task])]
+        return [industry_requirements_task, cv_analyzer_task,  CareerConsultingTask.setup(job_opp, candidate_name, [cv_analyzer_task, industry_requirements_task])]

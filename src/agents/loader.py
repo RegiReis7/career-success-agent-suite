@@ -9,4 +9,4 @@ class Agents:
 
     def load() -> List[Agent]:
 
-        return [CareerConsultant.setup(), CVAnalyzer.setup(), IndustryExpert.setup()]
+        return [IndustryExpert.setup(), CVAnalyzer.setup(), CareerConsultant.setup()]

@@ -3,12 +3,14 @@ from crewai import Crew
 import os
 from agents.loader import Agents
 from tasks.loader import Tasks
+from crewai.process import Process
+
 
 def main():
     # Title and description
     st.title("🚀 Be a Good Fit for an Opportunity")
     st.caption("This app helps you boost your CV and increase your chances to land your desired job. Enter your API keys to get started.")
-    
+
     global pdf_file
 
     # Sidebar inputs for API keys
@@ -30,7 +32,7 @@ def main():
         st.write("PDF file uploaded successfully!")
 
         # Main page inputs after processing button is hit
-        st.subheader("Tell Us About Yourself")
+        st.subheader("Tell Us About Yourself and the Job You're pursuing")
         user_name = st.text_input("Your Name")
         job_opp_name = st.text_input("Job Opportunity Name")
         key_requirements = st.text_input(
@@ -44,7 +46,8 @@ def main():
                 agents=Agents.load(),
                 tasks=Tasks.load(
                     job_opp=job_opp_name, candidate_name=user_name, requirements=key_requirements, cv=pdf_file),
-                verbose=2
+                verbose=2,
+                process=Process.sequential
             )
 
             result = crew.kickoff()

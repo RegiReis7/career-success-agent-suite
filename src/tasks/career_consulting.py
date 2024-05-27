@@ -22,7 +22,7 @@ class CareerConsultingTask():
             Candidate Name: {candidate_name}
             Desired Position: {job_opp}
             """),
-            expected_output=f"""A full report with the best advices to get the job opp ({
+            expected_output=f"""A full report with the best advices to get the job opp of ({
                 job_opp})""",
             context=contextTasks,
             output_file=f'{"-".join(job_opp.split())}-task-output.md',

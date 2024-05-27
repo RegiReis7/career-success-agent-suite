@@ -1,9 +1,9 @@
 from crewai import Task
 from agents.cv_analyzer import CVAnalyzer
-from agents.industry_expert import IndustryExpert
 from textwrap import dedent
 from tasks.custom_callback import writeTaskResult
-from tools.search_documents import SeachDocument
+from tools.search_documents import SearchDocument
+from langchain.tools.retriever import create_retriever_tool
 from streamlit.runtime.uploaded_file_manager import UploadedFile
 
 
@@ -11,7 +11,8 @@ class CVAnalyzerTask():
 
     def setup(job_opp: str, requirements: str, cv: UploadedFile | None, contextTask: Task):
 
-        search_documents_tool = SeachDocument(cv).search_document
+        search_documents_tool = create_retriever_tool(SearchDocument(cv).getRetriever(
+        ), "Document Search Engine", "Search through a document and retrieve the most relevant pieces based on the query")
 
         return Task(
             description=dedent(f"""
@@ -28,8 +29,10 @@ class CVAnalyzerTask():
             Job Title: {job_opp}
             Key Qualifications: {requirements}
             """),
+            expected_output=f"""A full report with the best advices to get the job opp of ({
+                job_opp})""",
             callback=writeTaskResult,
             tools=[search_documents_tool],
-            context=contextTask,
+            context=[contextTask],
             agent=CVAnalyzer.setup()
         )

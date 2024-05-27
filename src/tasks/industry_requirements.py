@@ -23,7 +23,9 @@ class IndustryReqTask():
 
             Job Opportunity Role: {job_opp}
             """),
+            expected_output=f"""A full report with the best advices to get the job opp of ({
+                job_opp})""",
             tools=[exa_tool],
             callback=writeTaskResult,
-            agent=IndustryExpert().setup()
+            agent=IndustryExpert.setup()
         )
