@@ -2,14 +2,14 @@ from crewai import Task
 from agents.industry_expert import IndustryExpert
 from textwrap import dedent
 from tasks.custom_callback import writeTaskResult
-from crewai_tools import EXASearchTool
+from langchain.tools.ddg_search import DuckDuckGoSearchRun
 
 
 class IndustryReqTask():
 
     def setup(job_opp):
 
-        exa_tool = EXASearchTool()
+        ddg_tool = DuckDuckGoSearchRun()
 
         return Task(
             description=dedent(f"""
@@ -25,7 +25,7 @@ class IndustryReqTask():
             """),
             expected_output=f"""A full report with the best advices to get the job opp of ({
                 job_opp})""",
-            tools=[exa_tool],
+            tools=[ddg_tool],
             callback=writeTaskResult,
             agent=IndustryExpert.setup()
         )

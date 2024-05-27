@@ -11,19 +11,9 @@ def main():
     st.title("🚀 Be a Good Fit for an Opportunity")
     st.caption("This app helps you boost your CV and increase your chances to land your desired job. Enter your API keys to get started.")
 
-    global pdf_file
-
-    # Sidebar inputs for API keys
-    with st.sidebar:
-        st.header("API Keys")
-        mistral_api_key = st.text_input("Enter Mistral API Key")
-        exa_search_api_key = st.text_input("Enter Exa Search API Key")
-
-        if st.button("Process"):
-            os.environ["EXA_API_KEY"] = exa_search_api_key
-            os.environ["OPENAI_API_KEY"] = mistral_api_key
-            os.environ["OPENAI_API_BASE"] = "https://api.mistral.ai/v1"
-            os.environ["OPENAI_MODEL_NAME"] = "mistral-small-2402"
+    os.environ["OPENAI_API_KEY"] = os.environ["MISTRAL_API_KEY"]
+    os.environ["OPENAI_API_BASE"] = "https://api.mistral.ai/v1"
+    os.environ["OPENAI_MODEL_NAME"] = "mistral-small-2402"
 
     pdf_file = st.file_uploader("Upload Your CV", type=["pdf"])
 

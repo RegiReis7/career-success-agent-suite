@@ -27,5 +27,4 @@ class CareerConsultingTask():
             context=contextTasks,
             output_file=f'{"-".join(job_opp.split())}-task-output.md',
             agent=CareerConsultant.setup(),
-            callback=writeTaskResult
         )
